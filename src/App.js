@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 
 function App() {
   const [ isLoggedIn, setIsLoggedIn ] = useState(false)
-  // console.log(isLoggedIn)
+  const [ isSignedUp, setIsSignedUp ] = useState(false)
 
   return (
     <div>
       <Login setIsLoggedIn={setIsLoggedIn} />
       {isLoggedIn && <div>로그인 성공(&&)!</div>}
       {isLoggedIn ? <div>로그인 성공(삼항)!</div> : <div>로그인 실패!</div>}
-      <SignUp />
+      <SignUp setIsSignedUp={setIsSignedUp}/>
+      {isSignedUp && <div>회원가입 성공(&&)!</div>}
     </div>
   );
 }
