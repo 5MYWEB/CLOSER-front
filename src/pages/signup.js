@@ -8,7 +8,7 @@ function SignUp(props) {
     password: '',
     email: '',
     addr: {
-      city: '서울',
+      city: '',
       gu: '',
       dong: ''
     },
@@ -40,7 +40,7 @@ function SignUp(props) {
       };
 
       const { name, value } = e.target;
-      console.log(name, value);
+      // console.log(name, value);
 
       // 주소만 구조가 다르므로 name이 주소 속성이면
       if (Object.keys(addr).includes(name)) {
@@ -61,9 +61,114 @@ function SignUp(props) {
     [userInfo]
   );
   
+    // 데이터 빈 값 검사
+    const checkExistData = (value, name) => {
+      console.log(value)
+      if (value === '') {
+        alert(name + ' 입력해주세요!')
+        return false;
+      }
+      return true;
+    }
+  
+    // 아이디 검사
+    const checkUserId = (id) => {
+      if (!checkExistData(id, '아이디를')) {
+        return false
+      }
+      // var idRegExp = /^[a-zA-z0-9]{4,12}$/; //아이디 유효성 검사
+      // if (!idRegExp.test(id)) {
+      //     alert("아이디는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+      //     form.userId.value = "";
+      //     form.userId.focus();
+      //     return false;
+      // }
+      return true
+    }
+  
+    // 닉네임 검사
+    const checkNickname = (nickname) => {
+      if (!checkExistData(nickname, '닉네임을')) {
+        return false
+      }
+      return true
+    }
+
+    // 비밀번호 검사
+    const checkPassword = (password) => {
+      if (!checkExistData(password, '비밀번호를')) {
+        return false
+      }
+      return true
+      // var password1RegExp = /^[a-zA-z0-9]{4,12}$/; //비밀번호 유효성 검사
+      // if (!password1RegExp.test(password1)) {
+      //     alert("비밀번호는 영문 대소문자와 숫자 4~12자리로 입력해야합니다!");
+      //     form.password1.value = "";
+      //     form.password1.focus();
+      //     return false;
+    }
+
+    // 이메일 검사
+    const checkEmail = (email) => {
+      if (!checkExistData(email, '이메일을')) {
+        return false
+      }
+      return true
+    }
+
+    // 주소 검사
+    
+    const checkAddr = (addr) => {
+      let { city, gu, dong } = addr;
+      if (!checkExistData(city, '시를')) {
+        return false
+      } else if (!checkExistData(gu, '구를')) {
+        return false
+      } else if (!checkExistData(dong, '동을')) {
+        return false
+      }
+      return true
+    }
+
+    // 폰번호 검사
+    const checkPhoneNumber = (phoneNumber) => {
+      if (!checkExistData(phoneNumber, "전화번호를")) {
+        return false
+      }
+      return true
+    }
+
+    // 자취시작연도 검사
+    const checkHomeAlone = (homeAlone) => {
+      if (!checkExistData(homeAlone, "자취시작년도를")) {
+        return false
+      }
+      return true
+    }
+
+    // 모든 검사
+    function checkAll() {
+      if (!checkUserId(userId)) {
+        return false;
+      } else if (!checkNickname(nickname)) {
+        return false;
+      } else if (!checkPassword(password)) {
+        return false;
+      } else if (!checkEmail(email)) {
+        return false;
+      } else if (!checkAddr(addr)) {
+        return false;
+      } else if (!checkPhoneNumber(phoneNumber)) {
+        return false;
+      } else if (!checkHomeAlone(homeAlone)) {
+        return false;
+      }
+      return true;
+    }
+
   // 회원가입 함수
-  const signup = (signupInfo) => {
-    const request = axios.post('http://localhost:8080/user/regist', signupInfo )
+  const signup = (userInfo) => {
+    const request = axios.post('http://localhost:8080/user/signup', userInfo )
       .then((response) =>{
         console.log(response);
         console.log(request);
@@ -75,20 +180,23 @@ function SignUp(props) {
   const onSubmit=(
     e => {
       e.preventDefault();
-      // 백으로 보내질 주소
-      userInfo.addr = String(userInfo.addr.city + userInfo.addr.gu + userInfo.addr.dong);
+      
+      if (checkAll() === true) {
+        // 자취 n년차 int 형변환
+        userInfo.homeAlone *= 1
 
-      console.log(userInfo)
-      // 그외 정보들이 입력되었는지 검사
+        // 백으로 보내질 주소(공백으로 구분)
+        userInfo.addr = String(userInfo.addr.city + userInfo.addr.gu + userInfo.addr.dong);
 
-      // 회원가입 함수의 파라미터 설정
-      const signupInfo = {}
-      // console.log(signupInfo);
+        console.log(userInfo)
 
-      // 회원가입 함수 실행
-      signup(signupInfo);
+        // 회원가입 함수의 파라미터 설정
 
-      // props.setIsSignedUp(true);
+        // 회원가입 함수 실행
+        signup(userInfo);
+
+        // props.setIsSignedUp(true);
+      }
     }
   )
 
@@ -125,6 +233,7 @@ function SignUp(props) {
       <p>주소를 입력하세요</p>
       <label htmlFor="city">Choose a City:</label>
       <select id="city" name="city" value={addr.city} onChange={onChange}>
+        <option defaultValue value="undefined"> -- 시를 선택해주세요 -- </option>
         <option value="서울시">서울시</option>
         <option value="용인시">용인시</option>
         <option value="인천시">인천시</option>
@@ -132,6 +241,7 @@ function SignUp(props) {
       </select>
       <label htmlFor="gu">Choose a gu:</label>
       <select id="gu" name="gu" value={addr.gu} onChange={onChange}>
+      <option defaultValue value="undefined"> -- 구를 선택해주세요 -- </option>
         <option value="동작구">동작구</option>
         <option value="마포구">마포구</option>
         <option value="서대문구">서대문구</option>
@@ -139,6 +249,7 @@ function SignUp(props) {
       </select>
       <label htmlFor="dong">Choose a dong:</label>
       <select id="dong" name="dong" value={addr.dong} onChange={onChange}>
+        <option defaultValue value="undefined"> -- 동을 선택해주세요 -- </option>
         <option value="염리동">염리동</option>
         <option value="동교동">동교동</option>
         <option value="서교동">서교동</option>
