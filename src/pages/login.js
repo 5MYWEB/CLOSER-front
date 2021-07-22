@@ -21,6 +21,7 @@ function Login(props) {
     [userInputs]
   );
 
+  // 데이터 빈 값 검사
   const checkExistData = (value, name) => {
     console.log(value)
     if (value === '') {
@@ -30,6 +31,7 @@ function Login(props) {
     return true;
   }
 
+  // 아이디 검사
   const checkUserId = (id) => {
     if (!checkExistData(id, "아이디를")) {
       return false
@@ -44,6 +46,7 @@ function Login(props) {
     return true
   }
 
+  // 비밀번호 검사
   const checkPassword = (password) => {
     if (!checkExistData(password, "비밀번호를")) {
       return false
@@ -57,6 +60,7 @@ function Login(props) {
     //     return false;
   }
 
+  // 모든 검사
   function checkAll() {
     if (!checkUserId(userId)) {
       return false;
@@ -66,6 +70,7 @@ function Login(props) {
     return true;
   }
 
+  // 검사 통과 후 진행되는 로그인
   const login = () => {
     const request = axios.post('http://localhost:8080/user/login', userInputs )
       .then((response) =>{
@@ -75,6 +80,7 @@ function Login(props) {
     return null
   };
     
+  // 제출 시 검사 함수 실행 후 로그인 함수 실행
   const onSubmit=(
     e => {
       e.preventDefault();
