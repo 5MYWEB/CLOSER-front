@@ -14,13 +14,13 @@ function SignUp(props) {
     },
     // addr: '',
     // 번호만 입력받기
-    phoneNumber: '',
+    phone: '',
     //HowLongLiveAlone
     homeAlone: ''
   });
 
   // 구조분해 할당
-  let { userId, nickname, password, email, addr, phoneNumber, homeAlone } = userInfo;
+  let { userId, nickname, password, email, addr, phone, homeAlone } = userInfo;
 
   // 몇년차인지 표시하기 
   const date = new Date();
@@ -180,6 +180,7 @@ function SignUp(props) {
   const onSubmit=(
     e => {
       e.preventDefault();
+      
       if (checkAll() === true) {
         // 자취 n년차 int 형변환
         userInfo.homeAlone *= 1
@@ -258,8 +259,8 @@ function SignUp(props) {
       <p>휴대전화 번호를 입력하세요</p>
       <input
         type="text"
-        name="phoneNumber"
-        value={phoneNumber}
+        name="phone"
+        value={phone}
         onChange={onChange}
       />
       <p>자취 몇년차이신가요?</p>
