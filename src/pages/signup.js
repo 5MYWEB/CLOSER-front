@@ -60,7 +60,9 @@ function SignUp(props) {
     e => {
       e.preventDefault();
       console.log(userInfo);
-      props.setIsSignedUp(true);
+      userInfo.livingAloneYear *= 1
+      console.log(typeof(userInfo.livingAloneYear))
+      console.log(props.setIsSignedUp(true));
     }
   )
 
