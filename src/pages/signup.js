@@ -180,6 +180,7 @@ function SignUp(props) {
   const onSubmit=(
     e => {
       e.preventDefault();
+<<<<<<< HEAD
       if (checkAll() === true) {
         // 자취 n년차 int 형변환
         userInfo.homeAlone *= 1
@@ -196,6 +197,26 @@ function SignUp(props) {
 
         // props.setIsSignedUp(true);
       }
+=======
+      
+      // 자취시작연도 int 형변환
+      userInfo.livingAloneYear *= 1
+      
+      // 백으로 보내질 주소
+      userInfo.addr = String(userInfo.addr.city + userInfo.addr.gu + userInfo.addr.dong);
+
+      console.log(userInfo)
+      // 그외 정보들이 입력되었는지 검사
+
+      // 회원가입 함수의 파라미터 설정
+      const signupInfo = {}
+      // console.log(signupInfo);
+
+      // 회원가입 함수 실행
+      signup(signupInfo);
+
+      // props.setIsSignedUp(true);
+>>>>>>> ff93fd917a933ccc192844746160526ee5420542
     }
   )
 
