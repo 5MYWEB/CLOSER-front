@@ -168,7 +168,7 @@ function SignUp(props) {
 
   // 회원가입 함수
   const signup = (userInfo) => {
-    const request = axios.post('http://localhost:8080/user/signup', userInfo )
+    const request = axios.post('http://localhost:8080/user/regist', userInfo )
       .then((response) =>{
         console.log(response);
         console.log(request);
@@ -186,7 +186,7 @@ function SignUp(props) {
         userInfo.homeAlone *= 1
 
         // 백으로 보내질 주소(공백으로 구분)
-        userInfo.addr = String(userInfo.addr.city + userInfo.addr.gu + userInfo.addr.dong);
+        userInfo.addr = String(userInfo.addr.city + ' ' + userInfo.addr.gu + ' ' + userInfo.addr.dong);
 
         console.log(userInfo)
 
