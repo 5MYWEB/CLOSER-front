@@ -14,13 +14,13 @@ function SignUp(props) {
     },
     // addr: '',
     // 번호만 입력받기
-    phoneNumber: '',
+    phone: '',
     //HowLongLiveAlone
     homeAlone: ''
   });
 
   // 구조분해 할당
-  let { userId, nickname, password, email, addr, phoneNumber, homeAlone } = userInfo;
+  let { userId, nickname, password, email, addr, phone, homeAlone } = userInfo;
 
   // 몇년차인지 표시하기 
   const date = new Date();
@@ -180,7 +180,7 @@ function SignUp(props) {
   const onSubmit=(
     e => {
       e.preventDefault();
-<<<<<<< HEAD
+      
       if (checkAll() === true) {
         // 자취 n년차 int 형변환
         userInfo.homeAlone *= 1
@@ -197,26 +197,6 @@ function SignUp(props) {
 
         // props.setIsSignedUp(true);
       }
-=======
-      
-      // 자취시작연도 int 형변환
-      userInfo.livingAloneYear *= 1
-      
-      // 백으로 보내질 주소
-      userInfo.addr = String(userInfo.addr.city + userInfo.addr.gu + userInfo.addr.dong);
-
-      console.log(userInfo)
-      // 그외 정보들이 입력되었는지 검사
-
-      // 회원가입 함수의 파라미터 설정
-      const signupInfo = {}
-      // console.log(signupInfo);
-
-      // 회원가입 함수 실행
-      signup(signupInfo);
-
-      // props.setIsSignedUp(true);
->>>>>>> ff93fd917a933ccc192844746160526ee5420542
     }
   )
 
@@ -279,8 +259,8 @@ function SignUp(props) {
       <p>휴대전화 번호를 입력하세요</p>
       <input
         type="text"
-        name="phoneNumber"
-        value={phoneNumber}
+        name="phone"
+        value={phone}
         onChange={onChange}
       />
       <p>자취 몇년차이신가요?</p>
