@@ -131,8 +131,8 @@ function SignUp(props) {
     }
 
     // 폰번호 검사
-    const checkPhoneNumber = (phoneNumber) => {
-      if (!checkExistData(phoneNumber, "전화번호를")) {
+    const checkPhone = (phone) => {
+      if (!checkExistData(phone, "전화번호를")) {
         return false
       }
       return true
@@ -158,7 +158,7 @@ function SignUp(props) {
         return false;
       } else if (!checkAddr(addr)) {
         return false;
-      } else if (!checkPhoneNumber(phoneNumber)) {
+      } else if (!checkPhone(phone)) {
         return false;
       } else if (!checkHomeAlone(homeAlone)) {
         return false;
