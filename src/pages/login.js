@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import axios from 'axios';
 
 function Login(props) {
   const [userInputs, setUserInputs] = useState({
@@ -19,12 +20,23 @@ function Login(props) {
     },
     [userInputs]
   );
+
+  const login = () => {
+    const request = axios.post('http://localhost:8080/user/login', userInputs )
+      .then((response) =>{
+        console.log(response)
+        console.log(request)
+      })
+    return null
+  };
+    
   const onSubmit=(
     e => {
       e.preventDefault();
-      console.log(userInputs.userId);
-      console.log(userInputs.password);
-      props.setIsLoggedIn(true);
+      // console.log(userInputs.userId);
+      // console.log(userInputs.password);
+      login();
+      // props.setIsLoggedIn(true);
     }
   )
 
